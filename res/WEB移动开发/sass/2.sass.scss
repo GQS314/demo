@@ -1,0 +1,28 @@
+$mainWidth: 200px;
+$dColor: #e92322;
+$bgc: #e92322;
+
+@import "1.sass.scss";
+body{
+  background-color: #fff;
+  >div{
+    color: #000;
+  }
+}
+.content{
+  background-color: #fff;
+  .div{
+    width: 20px;
+    height: 30px;
+    background-color: #fff;
+
+  }
+  >a{
+    display: block;
+    width: $mainWidth;
+    color: $dColor;
+  }
+  >ul{
+    background-color: $bgc;
+  }
+}

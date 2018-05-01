@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>webitvast</title>
+	<link rel="stylesheet" href="css/base.css" />
+	<style>
+		html,body{
+			height: 100%;
+		}
+		#container{
+			width: 50%;
+			height: 100%;
+		}
+		.goBack {
+			width: 4rem;
+			height: 4rem;
+			background-color: rgba(0, 0, 0, 0.7);
+			text-align: center;
+			line-height: 4rem;
+			font-size: 0.8rem;
+			cursor: pointer;
+			position: fixed;
+			border-radius: 50%;
+			bottom: 2rem;
+			right: 2rem;
+			z-index: 100;
+		}
+		.goBack>a{
+			color: #ccc;
+		}
+		.goBack>a:hover{
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container"></div>
+	<div class="goBack">
+		<a href="/index.html">回到首页</a>
+	</div>
+	<script charset="utf-8" src="lib/konva/konva.js"></script>
+	<script type="text/javascript">
+		/*
+		* 封装
+		* */
+		function Surround( option ){
+			this._init( option );
+		}
+		Surround.prototype = {
+			_init: function( option ){
+				if(!option.stage) option.stage = {};
+				if(!option.cont) option.cont = {};
+				if(!option.data) option.data = [];
+				
+				
+				var stage = document.querySelector('#'+option.stage.id);
+				//容器id 容器宽 容器高
+				this.stage = {
+					id: option.stage.id || 'container',
+//					x: option.stage.x || 0,
+//					y: option.stage.y || 0,
+					w: option.stage.w || (stage.clientWidth || window.innerWidth),
+					h: option.stage.h || (stage.clientHeight || window.innerHeight)
+				};
+				//绘制内容的宽高、中心点xy，默认为容器宽高、容器中心点
+				this.cont = {
+					contW: option.cont.contW || this.stage.w,
+					contH: option.cont.contH || this.stage.h,
+					cenX: option.cont.contW / 2 || this.stage.w / 2,
+					cenY: option.cont.contH / 2 || this.stage.h / 2
+				};
+				//所有圆的数据，data的个数就是层数
+				//{r: 90,bg: '#000',color: '#fff',opacity: .8,text: 'WEB全栈'}
+				this.data = [];
+				this.radiusBase = (this.cont.contW / 2 - option.data[0][0].r) / option.data.length ;
+				
+				for(var i = 0;i < option.data.length;i++){
+					this.data[i] = [];
+				  for(var j = 0;j < option.data[i].length;j++){
+				  	var randomBg = '#' + Math.floor( Math.random() * 256).toString(10);
+						var rb = parseInt( Math.random() * 60 + 30);
+				  	this.data[i][j] = {
+							r: option.data[i][j].r || rb,
+							bg: option.data[i][j].bg || randomBg,
+							color: option.data[i][j].color || '#fff',
+							opacity: option.data[i][j].opacity || .8,
+							
+							text: option.data[i][j].text || 'WEB全栈',
+							fontSize: option.data[i][j].fontSize || 18,
+							fontFamily: option.data[i][j].fontFamily || '微软雅黑',
+							fontStyle: option.data[i][j].fontStyle || 'normal',
+						
+							Ring: option.data[i][j].Ring || (option.data[i][j].r||rb) / 5 + (option.data[i][j].r||rb),
+							RingBg: option.data[i][j].RingBg || '#b4b4b4',
+							RingOpacity: option.data[i][j].RingOpacity || .4
+							
+						}
+				  }
+				}
+			},
+			_animate: function (angle, layer) {
+				//每秒钟设置旋转多少角度
+				var rotateAngleLayer = angle;
+				//Konva的动画系统
+				var animate = new Konva.Animation(function (frame) {
+					/*		1000毫秒				已过去20毫秒
+					 * 		———————— 	=  ————————————
+					 * 			60度					求旋转几度？
+					 *
+					 * 旋转度数 = 设置的每秒旋转60度 * 已过去的20毫秒 / 1000毫秒
+					 * */
+					var rotateAngle = rotateAngleLayer * frame.timeDiff / 1000;
+					layer.getChildren()[0].rotate( rotateAngle );//角度
+					layer.getChildren()[0].getChildren().rotate( -rotateAngle );
+				}, layer);
+				animate.start();
+				layer.getChildren()[0].on('mouseover', function () {
+					rotateAngleLayer = angle / 10;
+				});
+				layer.getChildren()[0].on('mouseout', function () {
+					rotateAngleLayer = angle;
+				});
+			},
+			drawLayer: function (start) {
+				if(this.data.length > 0){
+					var data = this.data,
+							length = data.length;
+					var stage = new Konva.Stage({
+						container: this.stage.id,
+						width: this.stage.w,
+						height: this.stage.h
+					});
+					var cenX = this.cont.cenX,
+							cenY = this.cont.cenY,
+							bgStroke = '#f0f0f0',
+							strokeWidth = 4,
+							dash = [10,4];
+					var bgLayer = new Konva.Layer();
+					stage.add(bgLayer);
+					for(var i = 1;i < length;i++){
+						var circle = new  Konva.Circle({
+							x: cenX,
+							y: cenY,
+							radius: data[0][0].r  + this.radiusBase * i,
+							stroke: bgStroke,
+							strokeWidth: strokeWidth,
+							dash: dash			//设置虚线 10实线 4像素空
+						});
+						bgLayer.add(circle);
+					}
+					for(var j = 0;j < length;j++){
+						var layer,
+								group = new Konva.Group({
+									//xy是组的中心点坐标
+									x: cenX,
+									y: cenY
+								});
+						if(j === 0){
+							layer = bgLayer;
+						}else{
+							layer = new Konva.Layer();
+							stage.add(layer);
+						}
+						for(var k = 0;k < data[j].length;k++){
+							
+							var innerR =  data[j][k].r,
+									outerR = data[j][k].Ring;
+							
+							var layerRadius = data[0][0].r  + this.radiusBase * j;
+							var angle = 360 / data[j].length;
+							//计算圆心的位置
+							var x0 = layerRadius * Math.cos( angle * k * Math.PI / 180);
+							var y0 = layerRadius * Math.sin( angle * k * Math.PI / 180);
+							var cx = 0;
+							var cy = 0;
+							if(j != 0){
+								cx = x0;
+								cy = y0;
+							}
+							var eleGroup = new Konva.Group({
+								//xy是中心点坐标
+								x: cx,
+								y: cy
+							});
+							//圆心
+							var cenCircle = new  Konva.Circle({
+								x: 0,
+								y: 0,
+								radius: innerR,
+								fill: data[j][k].bg,
+								opacity: data[j][k].opacity
+							});
+							//Ring圆环
+							var cenRing = new  Konva.Ring({
+								x: 0,
+								y: 0,
+								innerRadius: innerR,
+								outerRadius: outerR,
+								fill: data[j][k].RingBg,
+								opacity: data[j][k].RingOpacity
+							});
+							//文字
+							var cenText = new Konva.Text({
+								x: 0 - outerR,
+								y: 0 - data[j][k].fontSize / 2,
+								width: outerR * 2,
+								align: 'center',
+								text: data[j][k].text,
+								fontSize: data[j][k].fontSize,
+								fontFamily: data[j][k].fontFamily,
+								fontStyle: data[j][k].fontStyle,
+								fill: data[j][k].color
+							});
+							eleGroup.add(cenCircle);
+							eleGroup.add(cenRing);
+							eleGroup.add(cenText);
+							group.add(eleGroup);
+						}
+						layer.add(group);
+						layer.draw();
+					}
+//				console.log(stage.getChildren()[1].getChildren()[0]);
+					if(start === true && length >=2){
+						for(var l = 1;l < length;l++){
+							//80-10度
+							var num = Math.random() * 70 + 10;
+							num = parseInt(num, 10);
+							var direction = Math.random()*10;
+							direction = parseInt(direction, 10);
+							num = direction % 2 === 0 ? num : -num;
+//						num = l % 2 === 0 ? -num : num;
+							this._animate(num,stage.getChildren()[l]);
+						}
+					}
+				}
+			}
+		};
+		/*data = [
+		 [	{w: '180',h: '180',bg: '#000',color: '#fff',opacity: .8,text: 'web'} ],
+		 [	{w: '180',h: '180',bg: '#000',color: '#fff',opacity: .8,text: 'css'}],
+		 		{w: '180',h: '180',bg: '#000',color: '#fff',opacity: .8,text: 'js'}]
+		 ];*/
+		var s = new  Surround({
+			stage: { id: 'container'},
+			data: [
+				[
+					{r: 90,bg: '#000',text: 'WEB全栈',fontStyle: 'bold',Ring: 130,RingOpacity: .1}
+				],[
+					{r: 40,bg: '#1696dc',text: 'CSS'},
+					{r: 40,bg: '#54cb7b',text: 'JS',fontSize: 40},
+					{r: 30,bg: '#bc50cb',text: 'JQ',RingBg: '#bd4645',RingOpacity: .1}
+				],[
+					{r: 50,text: 'HTML5',opacity: .3}
+				],[
+					{text: 'LESS'},
+					{text: 'SASS'},
+					{text: 'LESS'},
+					{text: 'SASS'},
+					{text: 'SASS'},
+					{text: 'SASS'}
+				]
+			]
+		});
+		s.drawLayer(true);
+		
+		
+		
+	</script>
+</body>
+</html>

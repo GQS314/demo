@@ -1,0 +1,49 @@
+//定义
+@maniColor:#e92322;
+@width:200px;
+@height:200px;
+//定义一个代码段，@radius是参数，5px是默认值
+.bradius(@radius: 5px){
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+//引入外部less一起编译
+@import "4.LESS";
+
+
+//函数
+//颜色亮度减低10%
+//saturate(@maniColor,10%);
+//颜色亮度升高10%
+//lighten(@maniColor,10%);
+
+
+body{
+  .bradius();
+  >.show{
+    .bradius(10px);
+    :hover{
+      width: @str;
+    }
+  }
+}
+.container{
+  width: @width;
+  background-color: @maniColor;
+  .row{
+    height: @height;
+    >div{
+      border-left: 1px solid @maniColor;
+      >a{
+        color: #333;
+        :hover{
+          color: @maniColor;
+        }
+      }
+      >div{
+        border: 1px solid @maniColor;
+      }
+    }
+  }
+}

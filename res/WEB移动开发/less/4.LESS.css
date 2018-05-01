@@ -1,0 +1,35 @@
+body {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+body > .show {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+body > .show :hover {
+  width: 1000px;
+}
+.container {
+  width: 200px;
+  background-color: #e92322;
+}
+.container .row {
+  height: 200px;
+}
+.container .row > div {
+  border-left: 1px solid #e92322;
+}
+.container .row > div > a {
+  color: #333;
+}
+.container .row > div > a :hover {
+  color: #e92322;
+}
+.container .row > div > div {
+  border: 1px solid #e92322;
+}
+.left {
+  width: 200px;
+}

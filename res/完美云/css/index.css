@@ -1,0 +1,157 @@
+/*320px布局*/
+html{font-size: 100px;}
+body{font-size: 0.12rem;/*实际相当于14px*/}
+*{
+    padding:0;
+    margin:0;
+    font-family:"微软雅黑","Microsoft YaHei";
+    transition:all 0.3s ease-in-out;
+    -moz-transition:all 0.3s ease-in-out;
+    -webkit-transition:all 0.3s ease-in-out;
+    -o-transition:all 0.3s ease-in-out;
+}
+div.content{
+}
+div.One{
+	background: #fff;
+	padding: 0.1rem 0;
+}
+div.One img{
+	width: 1.26rem;
+	height: 0.3rem;
+	margin-left: 1.2rem;
+	display: block;
+}
+div.Two{
+	width: 3.2rem;
+	height: 1.2rem;
+	background-image: url(../img/bg1a.png);
+	background-size: cover;
+	background-position: 50% 50%;
+}
+/*div.Two img{
+	width: 3.2rem;
+}*/
+div.Three{
+	padding: 0.1rem;
+	text-align: center;
+	line-height: 0.25rem;;
+	color: #999;
+	background: #f9f9f9;
+}
+div.Four{
+	height: 2.5rem;
+	background: brown;
+	text-align: center;
+	padding: 0.1rem 0;
+	color: #fff;
+}
+div.Four embed{
+	margin-top: 0.1rem;
+	width: 3.0rem;
+	height: 1.97rem;
+	
+}
+#tb_player_11192287{
+	height: 500px;
+}
+div.Five{
+	text-align: center;
+	background: #EFCB38;
+	color: #fff;
+	padding-top: 0.1rem;
+}
+h2.title{
+	
+}
+div.five_d{
+	position: relative;
+	padding: 0.1rem 0;
+	color: #fff;
+}
+div.five_d:hover{
+	text-shadow:1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+div.five_d img{
+	width: 3.2rem;
+}
+div.five_d h2{
+	position: absolute;
+	top: 0.3rem;
+	left: 0.1rem;
+}
+div.five_d p{
+	text-align: left;
+	padding: 0 0.1rem;
+}
+div.five_ca{
+	background: #EFCB38;
+}
+div.five_cb{
+	background: #2987D3;
+}
+div.five_cc{
+	background: #CDB08A;
+}
+div.five_cd{
+	background: #84BFA1;
+}
+div.five_ce{
+	background: #F4726F;
+}
+div.five_cf{
+	background: #CDCDCD;
+}
+div.Six{
+	background: #00AFD1;
+	padding: 0.1rem 0;
+}
+div.Six a{
+	display: block;
+	width: 3.0rem;
+	height: 0.3rem;
+	text-align: center;
+	line-height: 0.3rem;
+	color: #fff;
+	border: 0.02rem solid #fff;
+	border-radius: 0.06rem;
+	margin: 0 auto 0.08rem;
+	text-decoration: none;
+}
+div.Six a:hover{
+	background: #fff;
+	color: #00AFD1;
+	text-shadow:0.01rem 0.01rem 0.02rem rgba(0, 0, 0, 0.2);
+}
+div.Seven{
+	text-align: center;
+	padding: 0.1rem 0 0.2rem;
+}
+div.Seven div{
+	margin-top: 0.08rem;
+}
+div.Seven div img{
+	width: 1.4rem;
+	border-radius: 0.08rem;
+}
+.goBack {
+	width: 0.5rem;
+	height: 0.5rem;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	line-height: 0.5rem;
+	font-size: 0.08rem;
+	cursor: pointer;
+	position: fixed;
+	border-radius: 50%;
+	bottom: 0.2rem;
+	right: 0.2rem;
+	z-index: 100;
+}
+.goBack>a{
+	text-decoration: none;
+	color: #ccc;
+}
+.goBack>a:hover{
+	color: #fff;
+}

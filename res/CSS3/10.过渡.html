@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过渡</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<style>
+		/*
+		transition	简写属性，用于在一个属性中设置四个过渡属性
+		transition-property	规定应用过渡的 CSS 属性的名称
+		transition-duration	定义过渡效果花费的时间。默认是 0
+		transition-timing-function	规定过渡效果的时间曲线。默认是 "ease"/linear/ease-in/ease-out/ease-in-out
+		transition-delay	规定过渡效果何时开始。默认是 0
+		*/
+		body{
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background-color: #333;
+			transition: all 2s ease-in 0.5s;
+		}
+		.box:hover{
+			width: 400px;
+			height: 400px;
+			background-color: #da2d34;
+			margin: 100px;
+			transform: rotate(90deg);
+		}
+		.box2{
+			width: 200px;
+			height: 200px;
+			background-color: #e5e849;
+			transition: width 2s ease-in 0.5s,height 1s 0.4s,background-color 3s,margin 1s,transform 1s,border-radius 1.5s;
+		}
+		.box2:hover{
+			width: 400px;
+			height: 400px;
+			background-color: #2492e7;
+			margin: 100px;
+			transform: rotate(90deg);
+			border-radius: 200px;
+		}
+		.box3{
+			width: 600px;
+			height: 200px;
+			transition: all 2s ease-in;
+			background: url("images/360wallpaper27.jpg") no-repeat center;
+			background-size: 100% auto;
+		}
+		.box3:hover{
+			background-size: 120% auto;
+		}
+		.box4{
+			width: 800px;
+			height: 200px;
+			transition: all 2s ease-in;
+			font-size: 30px;
+			text-align: center;
+			letter-spacing: 50px;
+			line-height: 200px;
+			background-color: #555;
+			color: #FFF;
+		}
+		.box4:hover{
+			letter-spacing: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box2"></div>
+	<div class="box3"></div>
+	<div class="box4">4亿用户的共同选择</div>
+</body>
+</html>

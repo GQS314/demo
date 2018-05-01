@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>切割轮播图</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<style>
+		.banner{
+			width: 1000px;
+			height: 500px;
+			/*background-color: #00AFD1;*/
+			margin: 100px auto;
+			position: relative;
+		}
+		.banner span{
+			display: block;
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			top: 50%;
+			margin-top: -25px;
+			border-top: 3px solid #000;
+			border-left: 3px solid #000;
+			box-sizing: border-box;
+			cursor: pointer;
+		}
+		.banner span:nth-of-type(1){
+			left: 3%;
+			transform: rotate(-45deg);
+		}
+		.banner span:nth-of-type(2){
+			right: 3%;
+			transform: rotate(135deg);
+		}
+		.banner>img{
+			width: 100%;
+			height: 100%;
+		}
+		.banner ul{
+			width: 100%;
+			height: 100%;
+			display: flex;
+		}
+		.banner ul li{
+			width: 100%;
+			height: 100%;
+			transform-style: preserve-3d;
+			position: relative;
+		}
+		.banner ul li div{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.banner ul li div:nth-child(1){
+			/*background: url("images/360wallpaper10.jpg") no-repeat;*/
+			/*background-size: 500% 100%;*/
+		}
+		.banner ul li div:nth-child(2){
+			/*background: url("images/360wallpaper15.jpg") no-repeat;*/
+			/*background-size: 500% 100%;*/
+			top: 100%;
+			transform-origin: 50% 0;
+			transform: rotateX(-90deg);
+		}
+		.banner ul li div:nth-child(3){
+			/*background: url("images/360wallpaper27.jpg") no-repeat;*/
+			/*background-size: 500% 100%;*/
+			/*transform: rotateZ(180deg) rotateY(180deg) translateZ(500px);*/
+		}
+		.banner ul li div:nth-child(4){
+			/*background: url("images/lanrentuku.com.jpg") no-repeat;*/
+			/*background-size: 500% 100%;*/
+			top: -100%;
+			transform-origin: 50% 100%;
+			transform: rotateX(90deg);
+		}
+		/*.banner ul li:nth-child(1) div{
+			background-position: 0 0;
+		}
+		.banner ul li:nth-child(2) div{
+			background-position: 25% 0;
+		}
+		.banner ul li:nth-child(3) div{
+			background-position: 50% 0;
+		}
+		.banner ul li:nth-child(4) div{
+			background-position: 75% 0;
+		}
+		.banner ul li:nth-child(5) div{
+			background-position: 100% 0;
+		}*/
+		.goBack {
+			width: 4rem;
+			height: 4rem;
+			background-color: rgba(0, 0, 0, 0.7);
+			text-align: center;
+			line-height: 4rem;
+			font-size: 0.8rem;
+			cursor: pointer;
+			position: fixed;
+			border-radius: 50%;
+			bottom: 2rem;
+			right: 2rem;
+			z-index: 100;
+		}
+		.goBack>a{
+			color: #ccc;
+		}
+		.goBack>a:hover{
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<img src="images/360wallpaper10.jpg" alt="">
+		<img src="images/360wallpaper15.jpg" alt="">
+		<img src="images/360wallpaper27.jpg" alt="">
+		<img src="images/lanrentuku.com.jpg" alt="">
+	</div>
+	<div class="goBack">
+		<a href="/index.html">回到首页</a>
+	</div>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	    $(function(){
+	    	/*类名，图片路径，切割数，时间*/
+			function bannerR(className,imgSrc2,liNum,time) {
+				var banner = $("."+className);
+				var bannerW = banner.width();
+				var bannerH = banner.height();
+				var imgSrc = banner.children("img");
+				var imgNum = imgSrc.length;
+				var html = "<ul>";
+				for(var i=0;i<liNum;i++){
+					html += "<li>";
+					for(var j=0;j<imgNum;j++){
+						html += "<div></div>";
+					}
+					html += "</li>";
+				}
+				html += "</ul> <span class='prev'></span> <span class='next'></span>";
+				banner.html(html);
+				var bannerLi = banner.find("ul li");
+				// console.log(bannerLi.find("div:nth-child(2)"));
+				bannerLi.css({"transform-origin": "50% 50% "+ -(bannerH/2) +"px",
+								"transition": "transform "+time+"s ease-in-out"});
+				for(var k=0;k<imgNum;k++){
+					var divNum = k + 1;
+					var selector = "div:nth-child("+ divNum +")";
+					bannerLi.find(selector).css({"background": "url("+imgSrc[k].src+") no-repeat",
+						"background-size": liNum*100+"% 100%"});
+					if(k==2){
+						bannerLi.find(selector).css(
+							{"transform": "rotateZ(180deg) rotateY(180deg) translateZ("+bannerH+"px)"});
+					}
+				}
+				for(var l=0;l<liNum;l++){
+					// console.log(bannerLi.eq(l));
+					bannerLi.eq(l).children("div").css({
+						"background-position": 100/(liNum-1)*l+"% 0"
+					});
+				}
+				var go = true;
+				$(".banner .prev").on("click",function () {
+					bannerRotate("left");
+				});
+				$(".banner .next").on("click",function () {
+					bannerRotate("right");
+				});
+				var num = 0;
+				function bannerRotate(direction) {
+					if(direction=="right"){
+						num++;
+					}else {
+						num--;
+					}
+					// console.log(num);
+					bannerLi.each(function (i,e) {
+						$(e).css({"transition-delay": i*0.2+"s",
+							transform:"rotateX("+num*90+"deg)"});
+					})
+				}
+			}
+			bannerR("banner",["images/360wallpaper10.jpg",
+				"images/360wallpaper15.jpg",
+				"images/360wallpaper27.jpg",
+				"images/lanrentuku.com.jpg"],6,0.8)
+	    });
+	</script>
+</body>
+</html>

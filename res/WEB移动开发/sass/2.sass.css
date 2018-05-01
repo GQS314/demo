@@ -1,0 +1,23 @@
+.body {
+  background-color: #000;
+  color: #000; }
+
+body {
+  background-color: #fff; }
+  body > div {
+    color: #000; }
+
+.content {
+  background-color: #fff; }
+  .content .div {
+    width: 20px;
+    height: 30px;
+    background-color: #fff; }
+  .content > a {
+    display: block;
+    width: 200px;
+    color: #e92322; }
+  .content > ul {
+    background-color: #e92322; }
+
+/*# sourceMappingURL=2.sass.css.map */

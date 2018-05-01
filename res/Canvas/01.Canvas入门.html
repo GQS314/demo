@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas入门</title>
+	<link rel="stylesheet" href="css/base.css" />
+	<style>
+		.content{
+			width: 88%;
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10px auto;
+		}
+		.content > canvas{
+			border: 1px solid #ccc;
+		}
+		.goBack {
+			width: 4rem;
+			height: 4rem;
+			background-color: rgba(0, 0, 0, 0.7);
+			text-align: center;
+			line-height: 4rem;
+			font-size: 0.8rem;
+			cursor: pointer;
+			position: fixed;
+			border-radius: 50%;
+			bottom: 2rem;
+			right: 2rem;
+			z-index: 100;
+		}
+		.goBack>a{
+			color: #ccc;
+		}
+		.goBack>a:hover{
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="802" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+		<canvas class="" width="400" height="400">
+			当前浏览器不支持Canvas，请更换浏览器再试(IE9以上)！
+		</canvas>
+	</div>
+	<div class="goBack">
+		<a href="/index.html">回到首页</a>
+	</div>
+	<script type="text/javascript">
+		//canvas不能用css控制宽高，用过内联样式表或js
+		
+		
+		//1.获取canvas标签
+		var canvas01 = document.querySelector('.content>canvas:nth-child(1)');
+		//2.获取canvas上下文
+		var ctx01 = canvas01.getContext('2d');
+		//3.绘制
+		ctx01.beginPath();
+		ctx01.moveTo(100,100);
+		ctx01.lineTo(200,200);
+		ctx01.lineTo(100,200);
+		ctx01.lineTo(100,100);
+		ctx01.stroke();
+		
+		ctx01.beginPath();
+		ctx01.moveTo(200,200);//起点
+		ctx01.lineTo(300,300);
+		ctx01.lineTo(200,300);
+		ctx01.closePath();		//自动闭合
+		ctx01.stroke();
+		
+		//重置路径、重新开始一条路径、新状态
+		/*
+		* 仍然会继承前面设置的样式，如lineWidth、strokeStyle等
+		* 但新路径设置的样式不会影响前面的路径，只作用于新路径
+		* */
+		ctx01.beginPath();
+		//起点
+		ctx01.moveTo(10,10);
+		ctx01.lineTo(90,10);
+		ctx01.lineTo(90,90);
+		ctx01.lineTo(10,90);
+		//自动闭合
+		ctx01.closePath();
+		//设置线的宽度
+		ctx01.lineWidth = 4;
+		//设置样式rgb() rgba() red #000
+		ctx01.strokeStyle = 'rgba(204,22,25,.5)';
+		//描边
+		ctx01.stroke();
+		//设置填充样式rgb() rgba() red #000
+		ctx01.fillStyle = '#1098CC';
+		//填充
+		ctx01.fill();
+		
+		
+		var canvas02 = document.querySelector('.content>canvas:nth-child(2)');
+		var ctx02 = canvas02.getContext('2d');
+		var canvW = canvas02.width;
+		var canvH = canvas02.height;
+		//绘制表格
+		ctx02.beginPath();
+		for(var i = 0;i <= canvW / 10;i++){
+			ctx02.moveTo(i*10,0);
+			ctx02.lineTo(i*10,canvH);
+			ctx02.moveTo(0,i*10);
+			ctx02.lineTo(canvW,i*10);
+		}
+		ctx02.lineWidth = .2;
+		ctx02.stroke();
+		
+		//坐标系，原点50,300
+		ctx02.beginPath();
+		ctx02.moveTo(50,300);
+		ctx02.lineTo(50,100);
+		ctx02.lineTo(45,105);
+		ctx02.moveTo(50,100);
+		ctx02.lineTo(55,105);
+		ctx02.moveTo(50,300);
+		ctx02.lineTo(350,300);
+		ctx02.lineTo(345,295);
+		ctx02.moveTo(350,300);
+		ctx02.lineTo(345,305);
+		ctx02.lineWidth = 2;
+		ctx02.strokeStyle = '#150dff';
+		ctx02.stroke();
+		
+		//折线图
+		ctx02.beginPath();
+		ctx02.moveTo(50,300);
+		ctx02.lineTo(90,200);
+		ctx02.lineTo(105,205);
+		ctx02.lineTo(130,250);
+		ctx02.lineTo(160,230);
+		ctx02.lineTo(200,100);
+		ctx02.lineTo(250,130);
+		ctx02.lineTo(280,200);
+		ctx02.lineTo(305,160);
+		ctx02.lineTo(332,280);
+		ctx02.strokeStyle = '#b50be5';
+		ctx02.stroke();
+		
+		var canvas03 = document.querySelector('.content>canvas:nth-child(3)');
+		var ctx03 = canvas03.getContext('2d');
+		//矩形 rect(x,y,width,height)x，y，宽，高
+		ctx03.rect(10,10,50,50);
+		ctx03.strokeStyle = '#1715cb';
+		ctx03.stroke();
+		
+		ctx03.beginPath();
+		ctx03.strokeStyle = '#bd4645';
+		ctx03.strokeRect(20,20,50,50);
+		
+		//清除、橡皮擦，把矩形内的所有图像清除;
+		ctx03.clearRect(0,0,30,30);
+		//canvas.width = canvas.width 重新设置canvas的款或高可以清除画布的内容
+		
+		//圆 arc(x,y,r,sAngle,eAngle,counterclockwise)
+		/*   arc(x,y,半径,开始角度,结束角度,绘画方向：true逆时针/false顺时针)
+						1.5*PI
+							 ┬
+			 1*PI  ├-┼-┤  0         --公式：  弧度=角度*PI/180
+							 ┴
+						0.5*PI
+		 
+		     
+						 ┬		文字					--文字的x、y坐标，公式：
+		 		   ├-┼-┤  	        	x = x0 + Math.cos(角度*Math.PI/180) * (r+距离)
+		 				 ┴								y = y0 + Math.sin(角度*Math.PI/180) * (r+距离)
+		      
+						
+						
+		 */
+		ctx03.beginPath();
+		ctx03.arc(100,100,50,0,1.5*Math.PI);
+		ctx03.strokeStyle = '#000';
+		//stroke绘制空心圆弧，fill绘制(填充)实心圆弧
+		ctx03.stroke();
+		
+		ctx03.beginPath();
+		ctx03.moveTo(206,102);
+		ctx03.arc(206,102,50,0,30*Math.PI/180);
+		ctx03.closePath();
+		ctx03.fillStyle = '#1696dc';
+		ctx03.fill();
+		
+		ctx03.beginPath();
+		ctx03.moveTo(200,100);
+		ctx03.arc(200,100,50,0,30*Math.PI/180,true);
+		ctx03.closePath();
+		ctx03.fillStyle = '#dc5a4d';
+		ctx03.fill();
+		
+		//绘制文字
+		ctx03.beginPath();
+//		ctx03.moveTo(210,50);
+		//设置填充样式
+		ctx03.fillStyle = '#b5081f';
+		//设置字体
+		ctx03.font = '30px "微软雅黑"';
+		//设置对齐方式left center right
+		ctx03.textAlign = 'left';
+		//设置起点与文字的那条线对齐，顶线top、中线middle、基线alphabetic、底线bottom
+		ctx03.textBaseline = 'bottom';
+		//绘制字体，空心
+		//ctx03.strokeText('你好',250,50);
+		//填充字体，实心
+		ctx03.fillText('你好',250,50);
+		
+		//
+		var data = [{
+			"value": .2,
+			"color": "red",
+			"title": "应届生"
+		},{
+			"value": .3,
+			"color": "blue",
+			"title": "社招生"
+		},{
+			"value": .4,
+			"color": "green",
+			"title": "推荐生"
+		},{
+			"value": .1,
+			"color": "#ccc",
+			"title": "公开课"
+		}];
+		//开始绘制的角度
+		var tempAngle = -90;
+		//原点坐标
+		var x0 = 200,y0 = 260;
+		//半径
+		var radius = 80;
+		for(var i = 0;i < data.length;i++){
+			//当前扇形的角度
+			var angle = data[i].value * 360;
+			//开始的角度
+			var startAngle = tempAngle * Math.PI / 180;
+			//结束的角度
+			var endAngle = (tempAngle + angle) * Math.PI / 180;
+			ctx03.beginPath();
+			ctx03.moveTo(x0,y0);
+			ctx03.arc(x0,y0,radius,startAngle,endAngle);
+			ctx03.closePath();
+//			ctx03.strokeStyle = data[i].color;
+//			ctx03.stroke();
+			ctx03.fillStyle = data[i].color;
+			ctx03.fill();
+			
+			var txt = data[i].value * 100 + '%-' + data[i].title;
+			var txtAngle = tempAngle + angle / 2;
+			var txt_x = x0 + Math.cos(txtAngle * Math.PI / 180) * (radius + 20);
+			var txt_y = y0 + Math.sin(txtAngle * Math.PI / 180) * (radius + 20);
+			ctx03.font = '14px "微软雅黑"';
+			ctx03.textBaseline = 'alphabetic';
+			if(txtAngle > 90 && txtAngle < 270){
+				ctx03.textAlign = 'right';
+			}
+			ctx03.fillText(txt, txt_x, txt_y);
+			//返回指定返回包含指定文本宽度的对象。
+			var w = ctx03.measureText(txt).width;
+			console.log(w);
+			
+			tempAngle += angle;
+		}
+		
+		
+		var canvas04 = document.querySelector('.content>canvas:nth-child(4)');
+		var ctx04 = canvas04.getContext('2d');
+		//图片绘制 ：效率比绘制图形要高得多
+		/*
+		 1.ctx.drawImage(img,x,y);
+		 	img是绘制图片的dom对象，x，y左上角坐标
+		 2.ctx.drawImage(img,x,y,width,height);
+		 	img是绘制图片的dom对象，x、y左上角坐标，图片宽高
+		 	--固定宽度，高度等比例缩放，公式：
+		 	h = w * height / width
+		 3.图片裁剪并绘制
+		 	ctx.drawImage(img, sx, sy, swidth, sheight, x, y, width, height);
+		 	sx,sy 裁剪的左上角坐标，swidth：裁剪图片的高度。 sheight:裁剪的高度
+		 4.将canvas当成图片绘制在另一个canvas上
+		 	提高性能：动态创建一个隐藏的canvas，把需要绘制的图形绘制在隐藏canvas上，绘制完成再
+		 						将隐藏canvas当成图片绘制在显示的canvas上
+		 	注：在隐藏的canvas上绘制相当于只在内存中计算，
+		 			在显示的canvas上绘制需要在内存中计算，还需要显卡,
+		 			这样就可以减少多次绘制时消耗的显卡的性能
+		 	ctx.drawImage(canvas, x, y)
+		 
+		 
+		 */
+		
+		//1.创建图片的dom对象
+		var img = new Image();
+		//只要设置的src属性，当前img对象立即去加载图片
+		img.src = 'img/l1.jpg';
+		//加载完成后执行一个方法
+		img.onload = function () {
+			//加载完成后，把图片绘制到canvas上
+			var oldW = img.width,
+					oldH = img.height,
+					newW = 400,
+					newH = newW * oldH / oldW;
+			ctx04.drawImage(img, 0, 0, newW, newH);
+			newW = 200;
+			newH = newW * oldH / oldW;
+			ctx04.drawImage(img, 0, 210, newW, newH);
+		};
+		
+		//
+		var img2 = new Image();
+		img2.src = 'img/DMMban.png';
+		img2.onload = function () {
+			ctx04.drawImage(img2, 40, 65, 40, 65, 200, 210, 40, 65);
+		};
+		
+		//序列帧动画
+		var img3 = new Image();
+		img3.src = 'img/DMMban.png';
+		img3.onload = function () {
+			var frameIndex = 0;
+			var sit = setInterval(function () {
+				//canvas.width = canvas.width 重新设置canvas的款或高可以清除画布的内容
+				//清除之前指定的内容
+				ctx04.clearRect(240, 210, 40, 65);
+				ctx04.drawImage(img3, frameIndex * 40, 0, 40, 65, 240, 210, 40, 65);
+				frameIndex++;
+				frameIndex %= 4;
+//				clearInterval(sit);
+			},1000 / 10); //1秒10帧
+		};
+		
+		/*
+		* 序列帧动画，面向对象编程：开始
+		* */
+		function Animate( option ) {
+			this._init(option);
+		}
+		Animate.prototype = {
+			_init: function (option) {
+				//参数实例化
+				if(!option.frameIndex) option.frameIndex = {};
+				if(!option.direction) option.direction = {};
+				if(!option.position) option.position = {};
+				if(!option.animateSize) option.animateSize = {};
+				
+				//图片地址
+				this.src = option.src || 'img/DMMban.png';
+				//x轴；总几帧，从第几帧开始，每帧的宽度（每帧的宽度必须一致）
+				this.frameIndex = {
+					frame: option.frameIndex.frame || 4,
+					index: option.frameIndex.index || 0,
+					swidth: option.frameIndex.swidth || 40
+				};
+				//y轴；总几组，显示第几组，每组的高度（每帧的高度，高度必须一致）
+				this.direction = {
+					dir: option.direction.dir || 4,
+					index: option.direction.index || 0,
+					sheight: option.direction.sheight || 65
+				};
+				//速度；每秒几帧(1000/10 每秒10帧)
+				this.speed = option.speed || 100;
+				//坐标；
+				this.position = {
+					x: option.position.x || 0,
+					y: option.position.y || 0
+				};
+				//图片大小；
+				this.animateSize = {
+					width: option.animateSize.width || 40,
+					height: option.animateSize.height || 65
+				};
+				//控制器，是否开启动画
+//				this.control = option.control || true;
+			},
+			run: function (ctx,control) {
+//				var ctx = this.cvCtx;
+				if(ctx){
+					var x0 = this.position.x,
+							y0 = this.position.y,
+							w = this.animateSize.width,
+							h = this.animateSize.height,
+							feame = this.frameIndex.frame,
+							findex = this.frameIndex.index,
+							sw = this.frameIndex.swidth,
+							dindex = this.direction.index,
+							sh = this.direction.sheight,
+							speed = this.speed;
+					
+					var img = new Image();
+					img.src = this.src;
+					img.onload = function () {
+						var times = setInterval(function () {
+							ctx.clearRect(x0, y0, w, h);
+							ctx.drawImage(img, findex * sw, dindex * sh, sw, sh, x0, y0, w, h);
+							findex++;
+							findex %= feame;
+							if(control) clearInterval(times);
+						}, speed);
+					};
+				}else{
+					console.log('请给动画配置一个画布');
+				}
+			}
+		};
+		var xgg = new Animate({
+			cvCtx: ctx04,
+			direction: { index: 1},
+			position: { x: 280, y: 210 }
+		});
+		xgg.run(ctx04);
+		xgg.run(ctx03);
+		var xjj = new Animate({
+			src: 'img/NPC4.png',
+			cvCtx: ctx04,
+			direction: { sheight: 130 },
+			position: { x: 320, y: 210 },
+			animateSize: { height: 130 }
+		});
+		xjj.run(ctx04);
+		/*
+		 * 序列帧动画，面向对象编程：结束
+		 * */
+		
+		
+		var canvas05 = document.querySelector('.content>canvas:nth-child(5)');
+		var ctx05 = canvas05.getContext('2d');
+		/*
+		 * 坐标系，面向对象编程：开始
+		 * */
+		function Coordinate( option ) {
+			this._init( option );
+		}
+		Coordinate.prototype = {
+			_init: function (option) {
+				if(!option.position) option.position = {};
+				if(!option.cdSize) option.cdSize = {};
+				if(!option.cdStyle) option.cdStyle = {};
+				
+				this.position = {
+					x: option.position.x || 0 ,
+					y: option.position.y || 0 ,
+					width: option.position.width || 300 ,
+					height: option.position.height || 300
+				};
+				this.cdSize = {
+					maxWidth: option.cdSize.maxWidth || 300,
+					maxHeight: option.cdSize.maxHeight || 300
+				};
+				this.cdStyle = {
+					xWidth: option.cdStyle.Width || 1,
+					xColor: option.cdStyle.xColor || '#000',
+					yWidth: option.cdStyle.yWidth || 1,
+					yColor: option.cdStyle.yColor || '#000'
+				};
+			},
+			drawBorder: function (ctx) {
+				var x0 = this.position.x,
+						y0 = this.position.y,
+						xw = this.position.width,
+						yh = this.position.height;
+				//x轴
+				ctx.beginPath();
+				ctx.moveTo(x0, y0);
+				ctx.lineTo(xw + x0, y0);
+				ctx.lineTo(xw + x0 - 5, y0 - 5);
+				ctx.moveTo(xw + x0, y0);
+				ctx.lineTo(xw + x0 - 5, y0 + 5);
+				ctx.strokeStyle = this.cdStyle.xColor;
+				ctx.lineWidth = this.cdStyle.xWidth;
+				ctx.stroke();
+				//y轴
+				ctx.beginPath();
+				ctx.moveTo(x0, y0);
+				ctx.lineTo(x0, y0 - yh);
+				ctx.lineTo(x0 - 5, y0 - yh + 5);
+				ctx.moveTo(x0, y0 - yh);
+				ctx.lineTo(x0 + 5, y0 - yh + 5);
+				ctx.strokeStyle = this.cdStyle.yColor;
+				ctx.lineWidth = this.cdStyle.yWidth;
+				ctx.stroke();
+			},
+			drawLine: function (ctx,data) {
+				/*
+				 * data = [{
+				 * 	position: [[0,0],[20,100],[30,90],[60,150]],
+				 * 	style: { width: 1, color: '#000', join: 'miter'},
+				 * 	dataType: 0
+				 * },{
+				 * 	position: [.4, .5, .3, .7],
+				 * 	style: { width: 1, color: '#000', join: 'miter'},
+				 * 	dataType: 1
+				 * }]
+				 * */
+				var x0 = this.position.x,
+						y0 = this.position.y,
+						maxH = this.cdSize.maxHeight;
+				for(var i = 0;i < data.length;i++){
+					var newLine = data[i];
+					var position = newLine.position;
+					var style = newLine.style || {};
+					var dataType = newLine.dataType || 0;
+					var pointWidth = this.cdSize.maxWidth / (position.length + 1);
+					ctx.beginPath();
+					for(var j = 0;j < position.length;j++){
+						var x = 0, y = 0;
+						switch (dataType){
+							case 0:
+								x = x0 + position[j][0];
+								y = y0 - position[j][1];
+								break;
+							case 1:
+								x = x0 + (j + 1) * pointWidth;
+								y = y0 - position[j] * maxH;
+								break;
+						}
+						ctx.lineTo(x, y);
+					}
+					ctx.lineWidth = style.width || 1;
+					ctx.strokeStyle = style.color || '#000';
+					//线段相交的样式：miter（默认）尖角，bevel平角，round圆角
+					ctx.lineJoin = style.join || 'miter';
+					ctx.stroke();
+				}
+			},
+			drawCd: function (ctx, data) {
+				if(ctx){
+					this.drawBorder(ctx);
+					this.drawLine(ctx, data);
+				}
+			}
+		};
+		var newCd = new Coordinate({
+			position: {x: 30, y: 350, width: 350, height: 300},
+			cdSize: {maxWidth: 300, maxHeight: 300}
+		});
+		newCd.drawCd(
+				ctx05,
+				[{
+					position: [[50, 110], [80, 60], [160, 90], [260, 150]],
+					style: {width: 6, color: '#475fc0'},
+					type: 0
+				},{
+					position: [[10, 10], [30, 100], [50, 90], [70, 90], [200, 165], [300, 180]],
+					style: {width: 6, color: '#c03725', join: 'bevel'},
+					type: 0
+				},{
+				 	position: [.4, .5, .35, .3, .7, .9],
+				 	style: { width: 3, color: '#bc50cb'},
+				 	dataType: 1
+				},{
+					position: [.4, .5, .35, .3, .7, .9, .4, .5, .35, .3, .7, .9],
+					style: { width: 3, color: '#54cb7b'},
+					dataType: 1
+				}]);
+		/*
+		 * 坐标系，面向对象编程：结束
+		 * */
+		var canvas06 = document.querySelector('.content>canvas:nth-child(6)');
+		var ctx06 = canvas06.getContext('2d');
+		
+		var newCd2 = new Coordinate({
+			position: {x: 30, y: 350, width: 700, height: 300},
+			cdSize: {maxWidth: 650, maxHeight: 300}
+		});
+		newCd2.drawCd(
+				ctx06,
+				[{
+					position: [.4, .5, .35, .3, .7, .9],
+					style: { width: 3, color: '#bc50cb'},
+					dataType: 1
+				},{
+					position: [.4, .5, .35, .3, .7, .9, .4, .5, .35, .3, .7, .9],
+					style: { width: 3, color: '#54cb7b'},
+					dataType: 1
+				}]);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

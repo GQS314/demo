@@ -1,0 +1,247 @@
+@charset "UTF-8";
+/**
+ * Created by pl on 2017/8/6.
+ */
+/*----------------*/
+body {
+  background-color: #f5f5f5; }
+
+/*----------------layout------------*/
+.jd-layout {
+  min-width: 300px;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative; }
+
+/*----------------吸顶头部搜索------------*/
+.jd-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 40px;
+  z-index: 100; }
+  .jd-header > .content {
+    min-width: 300px;
+    max-width: 640px;
+    margin: 0 auto;
+    height: 40px;
+    background-color: rgba(201, 21, 35, 0.85);
+    display: flex;
+    justify-content: space-between; }
+    .jd-header > .content > .icon-logo {
+      background-position: 0 -103px;
+      width: 60px;
+      height: 36px;
+      display: block;
+      margin: 4px 5px 0 10px; }
+    .jd-header > .content > form {
+      position: relative;
+      flex: 1; }
+    .jd-header > .content .icon-search {
+      background-position: -60px -109px;
+      width: 20px;
+      height: 20px;
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 5px; }
+    .jd-header > .content .search {
+      box-sizing: border-box;
+      border: 0;
+      width: 100%;
+      height: 30px;
+      margin-top: 5px;
+      border-radius: 15px;
+      padding: 0 10px 0 30px; }
+    .jd-header > .content .login {
+      color: #fff;
+      line-height: 40px;
+      padding: 0 12px;
+      font-size: 16px; }
+
+/*----------------广告轮播------------*/
+.jd-banner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .jd-banner img {
+    width: 100%; }
+
+/*----------------导航------------*/
+.jd-nav {
+  height: 150px;
+  width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 3.125%;
+  background-color: #fff; }
+  .jd-nav > ul {
+    width: 100%;
+    padding-top: 11px; }
+    .jd-nav > ul > li {
+      width: 25%;
+      height: 69px;
+      float: left; }
+      .jd-nav > ul > li > a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-align: center; }
+        .jd-nav > ul > li > a > img {
+          display: block;
+          width: 40px;
+          height: 40px;
+          margin: 0 auto; }
+        .jd-nav > ul > li > a > p {
+          font-size: 12px;
+          color: #666;
+          margin-top: 6px; }
+
+/*----------------大商品区域------------*/
+.jd-product {
+  margin: 0 5px 10px; }
+  .jd-product .productSection {
+    box-shadow: 0 0 1px 1px #e0e0e0;
+    margin-top: 8px;
+    background-color: #fff; }
+    .jd-product .productSection > .topbar {
+      height: 32px;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between; }
+      .jd-product .productSection > .topbar > .secondKill-left {
+        display: flex; }
+        .jd-product .productSection > .topbar > .secondKill-left > .sk-icon {
+          display: block;
+          background: url("../img/jdM/seckill-icon.png") no-repeat;
+          background-size: 16px 20px;
+          width: 16px;
+          height: 20px;
+          margin: 5px; }
+        .jd-product .productSection > .topbar > .secondKill-left > h5 {
+          font-size: 15px;
+          color: #d8505c;
+          line-height: 32px; }
+        .jd-product .productSection > .topbar > .secondKill-left > div {
+          display: flex;
+          margin: 8px 0 0 10px; }
+          .jd-product .productSection > .topbar > .secondKill-left > div > span {
+            display: block;
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border-radius: 1px;
+            margin-right: 2px; }
+          .jd-product .productSection > .topbar > .secondKill-left > div > .num {
+            width: 15px;
+            background-color: #444;
+            color: #fff; }
+          .jd-product .productSection > .topbar > .secondKill-left > div > .str {
+            width: 8px; }
+          .jd-product .productSection > .topbar > .secondKill-left > div > .day {
+            width: 13px; }
+      .jd-product .productSection > .topbar > .secondKill-right {
+        margin-right: 10px; }
+        .jd-product .productSection > .topbar > .secondKill-right > a {
+          line-height: 32px;
+          color: #333; }
+      .jd-product .productSection > .topbar > h5 {
+        font-size: 15px;
+        color: #666;
+        position: relative;
+        line-height: 32px;
+        padding-left: 15px; }
+        .jd-product .productSection > .topbar > h5::before {
+          content: '';
+          width: 3px;
+          height: 12px;
+          background-color: #d8505c;
+          position: absolute;
+          top: 10px;
+          left: 8px; }
+    .jd-product .productSection > .jd-secondKill > ul {
+      display: flex;
+      padding: 10px 0; }
+      .jd-product .productSection > .jd-secondKill > ul > li {
+        flex: 1;
+        position: relative; }
+        .jd-product .productSection > .jd-secondKill > ul > li + li::before {
+          content: '';
+          position: absolute;
+          top: 10px;
+          left: 0;
+          height: 70%;
+          border-left: 1px solid #e0e0e0; }
+        .jd-product .productSection > .jd-secondKill > ul > li > a {
+          text-align: center;
+          display: block;
+          width: 100%; }
+          .jd-product .productSection > .jd-secondKill > ul > li > a > img {
+            width: 64%;
+            margin: 0 auto; }
+          .jd-product .productSection > .jd-secondKill > ul > li > a > .new-price {
+            color: #e92322;
+            font-size: 13px; }
+          .jd-product .productSection > .jd-secondKill > ul > li > a > .old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 12px; }
+    .jd-product .productSection > .jd-cjg > a {
+      display: block; }
+      .jd-product .productSection > .jd-cjg > a > img {
+        width: 100%;
+        height: 100%; }
+    .jd-product .productSection > .jd-cjg > a:first-child {
+      float: left;
+      width: 50%;
+      height: 100%;
+      background-color: #000;
+      border-right: 1px solid #e0e0e0; }
+    .jd-product .productSection > .jd-cjg > a + a {
+      float: right;
+      width: 50%;
+      height: 50%;
+      background-color: #f40; }
+    .jd-product .productSection > .jd-cjg > a:last-child {
+      border-top: 1px solid #e0e0e0; }
+    .jd-product .productSection > .jd-rmhd > a {
+      display: block; }
+      .jd-product .productSection > .jd-rmhd > a > img {
+        width: 100%;
+        height: 100%; }
+    .jd-product .productSection > .jd-rmhd > a:first-child {
+      float: right;
+      width: 50%;
+      height: 100%;
+      background-color: #000;
+      border-left: 1px solid #e0e0e0; }
+    .jd-product .productSection > .jd-rmhd > a + a {
+      float: left;
+      width: 50%;
+      height: 50%;
+      background-color: #f40; }
+    .jd-product .productSection > .jd-rmhd > a:last-child {
+      border-top: 1px solid #e0e0e0; }
+    .jd-product .productSection > .topbar.nobor {
+      border-bottom: 0; }
+.goBack {
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  line-height: 4rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  position: fixed;
+  border-radius: 50%;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+}
+.goBack>a{
+  color: #ccc;
+}
+.goBack>a:hover{
+  color: #fff;
+}
+/*# sourceMappingURL=jdM.css.map */

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>柱状图</title>
+	<link rel="stylesheet" href="css/base.css" />
+	<style>
+		html,body{
+			height: 100%;
+		}
+		#container{
+			width: 100%;
+			height: 100%;
+		}
+		.goBack {
+			width: 4rem;
+			height: 4rem;
+			background-color: rgba(0, 0, 0, 0.7);
+			text-align: center;
+			line-height: 4rem;
+			font-size: 0.8rem;
+			cursor: pointer;
+			position: fixed;
+			border-radius: 50%;
+			bottom: 2rem;
+			right: 2rem;
+			z-index: 100;
+		}
+		.goBack>a{
+			color: #ccc;
+		}
+		.goBack>a:hover{
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="container"></div>
+	<div class="goBack">
+		<a href="/index.html">回到首页</a>
+	</div>
+	<script charset="utf-8" src="lib/konva/konva.js"></script>
+	<script type="text/javascript">
+		
+		function Histogram( option ){
+			this._init( option );
+		}
+		Histogram.prototype = {
+			_init: function( option ){
+				if(!option.data) option.data = [];
+				if(!option.cont) option.cont = {};
+				
+				var stage = document.querySelector('#'+option.stage.id);
+				this.stage = {
+					id: option.stage.id,
+					w: option.stage.w || (stage.clientWidth || window.innerWidth),
+					h: option.stage.h || (stage.clientHeight || window.innerHeight)
+				};
+				//绘制内容的宽高、中心点xy，默认为容器宽高、容器中心点
+				this.cont = {
+					contW: option.cont.contW || this.stage.w,
+					contH: option.cont.contH || this.stage.h,
+					cenX: option.cont.cenX || this.stage.w / 2,
+					cenY: option.cont.cenY || this.stage.h / 2
+				};
+				this.duration = option.duration || 1.5;
+				/*
+				* data =[{name:'web',value:.8,color:'#000'},{}]
+				* */
+				this.data = option.data;
+			},
+			drawLayer: function (start) {
+				if(this.data.length > 0){
+					var data = this.data;
+					var length = data.length;
+					var bottomLine = 9/10 * this.cont.contH;
+					var width = 8/10 * this.cont.contW;
+					var margin = 2/10 * this.cont.contW;
+					var oneWidth = width / (length * 2);
+					
+					var stage = new Konva.Stage({
+						container: this.stage.id,
+						width: this.stage.w,
+						height: this.stage.h
+					});
+					var Layer = new Konva.Layer();
+					stage.add(Layer);
+					for(var i = 0;i < length;i++){
+					  var rect = new Konva.Rect({
+							x: oneWidth * (2 * i+1) + (margin + oneWidth) / 2,
+							y: bottomLine,
+							width: oneWidth,
+							height: 0,
+							opacity: .8,
+							fill: data[i].color,
+							cornerRadius: oneWidth / 8   //corner：角、角落
+						});
+						//文字
+						var topText = new Konva.Text({
+							x: oneWidth * (2 * i) + (margin + oneWidth) / 2,
+							y: bottomLine - 30,
+							width: oneWidth,
+							align: 'center',
+							text: data[i].value * 100 + '%',
+							fontSize: 16,
+							fontFamily: 'Microsoft Yahei',
+							fill: '#333'
+						});
+						var bottomText = new Konva.Text({
+							x: oneWidth * (2 * i) + (margin + oneWidth) / 2,
+							y: bottomLine + 30,
+							width: oneWidth,
+							align: 'center',
+							text: data[i].name,
+							fontSize: 16,
+							fontFamily: 'Microsoft Yahei',
+							fill: data[i].color
+						});
+					  rect.rotate(-180);
+					  Layer.add(rect);
+					  Layer.add(topText);
+					  Layer.add(bottomText);
+						
+					}
+					Layer.draw();
+					//点击画布事件
+					stage.on('contentClick',function () {
+						/*
+						* each    Konva提供的数组遍历方法，Konva数组才能用
+						* item 	 元素
+						* index	 索引
+						* */
+						Layer.find('Text').each(function (item, index) {
+							console.log(item);
+						})
+					});
+					if(start === true && length > 0){
+						var r = Layer.getChildren();
+						console.log(Layer.find('Text'));
+						for(var j = 1;j <= length;j++){
+							var num = 3 * j - 3;
+							r[num].to({
+								height: data[j - 1].value * this.cont.contH,
+//								opacity: .8,
+								duration: this.duration,				//时间
+								easing: Konva.Easings.EaseOut
+							});
+							r[num+1].to({
+								y: bottomLine - data[j - 1].value * this.cont.contH - 30,
+//								opacity: .8,
+								duration: this.duration,				//时间
+								easing: Konva.Easings.EaseOut
+							});
+						}
+					}
+				}
+			}
+		};
+		var h = new Histogram({
+			stage: {id: 'container'},
+			duration: 1.5,
+			data:[
+				{name:'web',value:.8,color:'#dc5a4d'},
+				{name:'html',value:.4,color:'#1696dc'},
+				{name:'css',value:.6,color:'#2ebd7f'},
+				{name:'js',value:.3,color:'#bc50cb'},
+				{name:'jq',value:.8,color:'#dc5a4d'},
+				{name:'html5',value:.4,color:'#1696dc'},
+				{name:'css3',value:.6,color:'#2ebd7f'},
+				{name:'sass',value:.3,color:'#bc50cb'}
+			]
+		});
+		h.drawLayer(true);
+		
+	</script>
+</body>
+</html>

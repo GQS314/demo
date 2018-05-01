@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>360</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<link href="css/16.360.css" rel="stylesheet" type="text/css"/>
+	<link href="css/jquery.fullPage.css" rel="stylesheet" type="text/css"/>
+	<script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="fullpage">
+		<section class="section">
+			<!--logo-->
+			<div class="logo"></div>
+			<!--文字-->
+			<div class="text">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<!--特制-->
+			<div class="feature"></div>
+		</section>
+		<section class="section">
+			<!--盾牌-->
+			<div class="shield">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<!-- 介绍 -->
+			<div class="intro"></div>
+		</section>
+		<section class="section">
+			<!-- 介绍 -->
+			<div class="intro"></div>
+			<!-- 圆环 -->
+			<div class="circle">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<!-- 火箭 -->
+			<div class="rocket"></div>
+		</section>
+		<section class="section">
+			<!-- 搜索框 -->
+			<div class="search">
+				<!-- 关键字 -->
+				<span class="key"></span>
+				<!-- 查询结果 -->
+				<div class="wrap">
+					<div class="tips"></div>
+				</div>
+			</div>
+			<!-- 介绍 -->
+			<div class="intro"></div>
+		</section>
+		<section class="section">
+			<!-- 介绍 -->
+			<div class="intro"></div>
+			<div class="browser">
+				<!-- 背影 -->
+				<div class="bg"></div>
+				<!-- 工具栏 -->
+				<div class="swrap">
+					<span></span>
+				</div>
+				<!-- 边框线 -->
+				<div class="line"></div>
+				<div class="leftside border"></div>
+				<div class="topside border"></div>
+				<div class="rightside border"></div>
+				<div class="bottomside border"></div>
+			</div>
+		</section>
+	</div>
+	<div class="goBack">
+		<a href="/index.html">回到首页</a>
+	</div>
+	<script src="js/jquery.fullPage.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	    $(function () {
+			$('.fullpage').fullpage({
+				css3: true,
+				navigation: true,
+				afterLoad: function (anchorLink, index) {
+					$('.section').removeClass('current');
+					
+					// 延时100毫秒执行
+					setTimeout(function () {
+						$('.section').eq(index - 1).addClass('current');
+					}, 100);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+/**
+ * Created by pl on 2017/7/24.
+ */
+
+/*1.选择器：属性选择器
+[attribute]								$("a[href]")							属性
+[attribute=value]						$("a[href='http://www.baidu.com']")		等于
+[attribute!=value]						$("a[href!='https']") 					不等于
+[attribute~=value]						$("a[class~='nav']") 					属性中单个、多个值的时候，其中一个等于（空格划分）
+[attribute|=value]						$("a[class|='nav']") 					属性中单个、多个值的时候，其中一个等于（-划分）
+[attribute^=value]						$("a[href^='http']")					以http开头
+[attribute$=value]						$("a[href$='com']")						以com结尾
+[attribute*=value]						$("a[href*='ab']")						包含ab这个字符
+[attribute1][attribute3][attribute2]	$("a[href][title]")						多个属性，交集
+*/
+form input[type=text]{
+	width: 100px;
+	margin-bottom: 8px;
+}
+form input[type=password]{
+	padding-left: 10px;
+}
+form input[type=button]{
+	border: none;
+	background-color: #2f2f2f;
+	color: #fff;
+}
+a.eg_a_href[href^="http"]{
+	color: #8B0000;
+}
+a.eg_a_href[href$="html"]{
+	background-color: #1a8b0f;
+}
+.eg1>span{
+	display: block;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #000000;
+}
+/*
+2.伪类选择器
+:hover				鼠标经过
+:active				选定的链接
+:visited			已访问的链接
+:link				未访问的链接
+:focus				获得焦点
+:not(selector) 		选择器匹配非指定元素/选择器的每个元素。
+:first-child		当前元素的父级的所有子元素的第一个元素
+:last-child			当前元素的父级的所有子元素的最后一个元素
+:first-of-type		当前元素的父级的特定子元素（当前元素）的第一个元素
+:last-of-type		当前元素的父级的特定子元素（当前元素）的最后一个元素
+:nth-child(n)		当前元素的父级的所有子元素的第n个元素
+:nth-of-child(n)	当前元素的父级的特定子元素（当前元素）的第n个元素
+:nth-last-child(n)	当前元素的父级的所有子元素的倒数第n个元素
+:only-child			当前元素（父级元素仅有该元素唯一一个子元素的时候才能生效）
+:empty				表示元素没有任何内容时才被选中
+:target				突出显示活动的 HTML 锚
+:checked			选择器匹配每个已被选中的 input 元素（只用于单选按钮和复选框）
+:enabled			选择器匹配每个启用的的元素（主要用于表单元素）。
+:disabled			选择器匹配每个禁用的的元素（主要用于表单元素）。
+*/
+article.eg1 dl dt:first-child{
+	background-color: #5d5f33;
+}
+article.eg1 dl dd:last-child{
+	background-color: #41be19;
+	color: #fff;
+}
+/*article.eg1 dl dd:first-child{  } 这个时候取不到第一个dd，因为dd不是父级的第一个子元素 */
+article.eg1 dl dd:first-of-type{
+	background-color: #363ea3;
+	color: #fff;
+}
+article.eg1 dl dd:nth-child(3){
+	background-color: #a11e24;
+	color: #fff;
+}
+article.eg1 dl dd:nth-of-type(3){
+	background-color: #a16767;
+	color: #fff;
+}
+article.eg1 dl dd span:only-child{
+	background-color: #000;
+	color: #fff;
+}
+
+/*
+3.伪元素选择器
+::before			在元素之前添加内容
+::after				在元素之后添加内容
+::first-line		向文本的首行添加特殊样式
+::first-letter		向文本的第一个字母添加特殊样式
+::selection			匹配被用户选取的部分，color、background、cursor 以及 outline。
+::placeholder		设置对象文字占位符的样式，用于控制表单输入框占位符的外观
+::-webkit-input-placeholder
+:-ms-input-placeholder		// IE10+
+:-moz-placeholder			// Firefox4-18
+::-moz-placeholder			// Firefox19+
+*/
+article.eg2 p{
+	width: 680px;
+}
+article.eg2 p::after{
+	content: "--这是伪元素after动态添加的文字，以及first-letter首字母字体变大、first-line首行背景色";
+	color: #84BFA1;
+}
+article.eg2 p::first-letter{
+	font-size: 40px;
+}
+article.eg2 p::first-line{
+	background-color: #2AB2DF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.box{
+}
+.box>article{
+	width: 90%;
+	padding: 10px 20px;
+	margin: 60px auto;
+}
+.eg{
+	box-shadow: 0 0 20px 0 #999;
+	/*
+	1.必需，阴影水平偏移值，可负
+	2.必需，阴影垂直偏移值，可负
+	3.可选，阴影模糊值
+	3.可选，阴影外延值，可负
+	5.阴影颜色
+	6.可选，inset设置为内阴影，为空时为外阴影
+	*/
+}
+.eg1{
+	box-shadow: 10px 0 20px 0 #999;
+}
+.eg2{
+	box-shadow: 0 10px 20px 0 #999;
+}
+.eg3{
+	box-shadow: 10px 10px 20px 0 #999;
+}

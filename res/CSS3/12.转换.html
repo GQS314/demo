@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>装换</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<style>
+		div.wrapper{
+			text-align: center;
+		}
+		div.wrapper>header{
+			margin: 40px auto;
+			font-size: 30px;
+		}
+		div.main{
+			width: 1500px;
+			/*border: 1px solid #ccc;*/
+			margin: 0 auto;
+		}
+		div.item{
+			width: 300px;
+			height: 300px;
+			box-shadow: 0 0 3px #777;
+			float: left;
+			position: relative;
+			display: flex;
+		}
+		/*
+		属性					描述
+		transform			向元素应用 2D 或 3D 转换。
+		transform-origin	允许你改变被转换元素的中心点位置。
+			transform-origin: x-axis y-axis z-axis;
+			x-axis：定义视图被置于 X 轴的何处。可能的值：left/center/right/length/%
+			y-axis：定义视图被置于 Y 轴的何处。可能的值：top/center/bottom/length/%
+			z-axis：定义视图被置于 Z 轴的何处。可能的值：length
+		transform-style		规定被嵌套元素如何在 3D 空间中显示。
+			transform-style: flat|preserve-3d;
+			flat		子元素将不保留其 3D 位置。
+			preserve-3d	子元素将保留其 3D 位置。
+		perspective			规定 3D 元素的透视效果。
+							属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。
+							当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。
+							注释：perspective 属性只影响 3D 转换元素。
+			perspective: number|none;
+			number		元素距离视图的距离，以像素计。
+			none		默认值。与 0 相同。不设置透视。
+		perspective-origin	规定 3D 元素的底部位置。
+			perspective-origin: x-axis y-axis;
+			x-axis：定义该视图在 x 轴上的位置。默认值：50%。可能的值：left/center/right/length/%
+			y-axis：定义该视图在 y 轴上的位置。默认值：50%。可能的值：top/center/bottom/length/%
+		backface-visibility	定义元素在不面对屏幕时是否可见。
+			backface-visibility: visible|hidden;
+			visible		背面是可见的。
+			hidden		背面是不可见的。
+		
+		2D Transform 方法
+		函数						描述
+		matrix(n,n,n,n,n,n)		定义 2D 转换，使用六个值的矩阵。
+		translate(x,y)			定义 2D 转换，沿着 X 和 Y 轴移动元素。
+		translateX(n)			定义 2D 转换，沿着 X 轴移动元素。
+		translateY(n)			定义 2D 转换，沿着 Y 轴移动元素。
+		scale(x,y)				定义 2D 缩放转换，改变元素的宽度和高度。
+		scaleX(n)				定义 2D 缩放转换，改变元素的宽度。
+		scaleY(n)				定义 2D 缩放转换，改变元素的高度。
+		rotate(angle)			定义 2D 旋转，在参数中规定角度。
+		skew(x-angle,y-angle)	定义 2D 倾斜转换，沿着 X 和 Y 轴。
+		skewX(angle)			定义 2D 倾斜转换，沿着 X 轴。
+		skewY(angle)			定义 2D 倾斜转换，沿着 Y 轴。
+		
+		3D 转换方法
+		函数						描述
+		matrix3d(n,n,n,n,n,n,
+		n,n,n,n,n,n,n,n,n,n)	定义 3D 转换，使用 16 个值的 4x4 矩阵。
+		translate3d(x,y,z)		定义 3D 转化。
+		translateX(x)			定义 3D 转化，仅使用用于 X 轴的值。
+		translateY(y)			定义 3D 转化，仅使用用于 Y 轴的值。
+		translateZ(z)			定义 3D 转化，仅使用用于 Z 轴的值。
+		scale3d(x,y,z)			定义 3D 缩放转换。
+		scaleX(x)				定义 3D 缩放转换，通过给定一个 X 轴的值。
+		scaleY(y)				定义 3D 缩放转换，通过给定一个 Y 轴的值。
+		scaleZ(z)				定义 3D 缩放转换，通过给定一个 Z 轴的值。
+		rotate3d(x,y,z,angle)	定义 3D 旋转。
+		rotateX(angle)			定义沿 X 轴的 3D 旋转。
+		rotateY(angle)			定义沿 Y 轴的 3D 旋转。
+		rotateZ(angle)			定义沿 Z 轴的 3D 旋转。
+		perspective(n)			定义 3D 转换元素的透视视图。
+		*/
+		div.item .transform{
+			width: 180px;
+			height: 180px;
+			background-color: #4b8b64;
+			margin: auto;
+			transition: all 1s;
+			text-align: center;
+			color: #fff;
+			line-height: 180px;
+			font-size: 30px;
+		}
+		div.item:nth-of-type(1):hover .transform{
+			transform: rotate(45deg);
+		}
+		div.item:nth-of-type(2):hover .transform{
+			transform: rotate(-45deg);
+		}
+		div.item:nth-of-type(3):hover .transform{
+			transform: scale(1.5);
+		}
+		div.item:nth-of-type(4):hover .transform{
+			transform: scale(1.5,0.5);
+		}
+		div.item:nth-of-type(5):hover .transform{
+			transform: translate(20px,20px);
+		}
+		div.item:nth-of-type(6):hover .transform{
+			transform: skew(30deg);
+		}
+		div.item:nth-of-type(7):hover .transform{
+			transform: skew(30deg,30deg);
+		}
+		div.item:nth-of-type(8):hover .transform{
+			transform: translate(50px) rotate(45deg) scale(0.5) skew(15deg,15deg);
+		}
+		div.item:nth-of-type(9):hover .transform{
+			transform: rotate3d(1,0,0,45deg);
+		}
+		div.item:nth-of-type(10):hover .transform{
+			transform: rotate3d(0,1,0,45deg);
+		}
+		div.item:nth-of-type(11):hover .transform{
+			transform: rotate3d(1,1,0,45deg);
+		}
+		div.item:nth-of-type(12):hover .transform{
+			transform-origin: 50% 100%;
+			transform: rotateX(45deg);
+		}
+		div.item:nth-of-type(13){
+			perspective: 100px;
+		}
+		div.item:nth-of-type(13):hover .transform{
+			transform-origin: 50% 100%;
+			transform: rotateX(45deg);
+		}
+		div.item:nth-of-type(14){
+			perspective: 100px;
+			perspective-origin: 90% 20%; /*视线消失点*/
+		}
+		div.item:nth-of-type(14):hover .transform{
+			transform-origin: 50% 100%;
+			transform: rotateX(45deg);
+		}
+		/*立方体*/
+		div.item:nth-of-type(15) .transform{
+			transform-style: preserve-3d;
+			position: relative;
+			background-color: transparent;
+			animation: rot_show 10s infinite;
+			transform-origin: 50% 50% -90px;
+		}
+		div.item:nth-of-type(15) .transform li{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(1){
+			background-color: rgba(255,0,0,0.5);
+			top: 0;
+			left: 0;
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(2){
+			background-color: rgba(0,255,0,0.5);
+			top: 100%;
+			left: 0;
+			transform-origin: 50% 0;
+			transform: rotateX(-90deg);
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(3){
+			background-color: rgba(0,0,255,0.5);
+			top: 0;
+			left: 0;
+			/*transform-origin: 50% 0;*/
+			transform: rotateY(180deg) translateZ(180px);
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(4){
+			background-color: rgba(255, 252, 40, 0.5);
+			top: -100%;
+			left: 0;
+			transform-origin: 50% 100%;
+			transform: rotateX(90deg);
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(5){
+			background-color: rgba(239, 10, 255, 0.5);
+			top: 0;
+			left: -100%;
+			transform-origin: 100% 50%;
+			transform: rotateY(-90deg);
+		}
+		div.item:nth-of-type(15) .transform li:nth-child(6){
+			background-color: rgba(32, 255, 230, 0.5);
+			top: 0;
+			left: 100%;
+			transform-origin: 0 50%;
+			transform: rotateY(90deg);
+		}
+		@keyframes rot_show {
+			0% {
+				/*transform: rotate(0);*/
+			}
+			50% {
+				transform: rotateX(360deg) rotateY(180deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<header>CSS3 背景</header>
+		<div class="main">
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="2D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform">3D 旋转演示</div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform">3D 旋转演示</div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform">3D 旋转演示</div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform">3D 旋转演示</div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<ul class="transform">
+					<li>第1个盒子</li>
+					<li>第2个盒子</li>
+					<li>第3个盒子</li>
+					<li>第4个盒子</li>
+					<li>第5个盒子</li>
+					<li>第6个盒子</li>
+				</ul>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="3D">
+				<div class="transform"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

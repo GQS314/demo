@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圆角</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<style>
+		div.wrapper{
+			text-align: center;
+		}
+		div.wrapper>header{
+			margin: 40px auto;
+			font-size: 30px;
+		}
+		div.main{
+			width: 1500px;
+			/*border: 1px solid #ccc;*/
+			margin: 0 auto;
+		}
+		div.item{
+			width: 300px;
+			height: 300px;
+			box-shadow: 0 0 3px #777;
+			float: left;
+			position: relative;
+			display: flex;
+		}
+		div.item::before{
+			content: 'BR:'attr(data-brief);
+			text-align: center;
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			line-height: 270px;
+			font-size: 16px;
+			color: #666666;
+			top: 0;
+			left: 0;
+			z-index: 100;
+		}
+		div.item::after{
+			content: attr(data-wh);
+			text-align: center;
+			position: absolute;
+			display: block;
+			width: 100%;
+			height: 100%;
+			line-height: 330px;
+			font-size: 18px;
+			color: #666666;
+			top: 0;
+			left: 0;
+			z-index: 100;
+		}
+		/*--border-radius:[1-4]用长度值或百分比设置圆角半径长度
+			4：上左(top-left)、上右(top-right)、下右(bottom-right)、下左(bottom-left)
+			3：上左、上右下左、下右
+			2：上左下右、上右下左
+			1：四角
+			分别设置长短半径以/进行分隔
+			表格运用圆角需要border-collapse:separate;
+			当圆角半径小于或等于边框宽度时，元素内解是直角
+		*/
+		
+		.border-radius{
+			width: 260px;
+			height: 260px;
+			border: 1px solid #8B0000;
+			margin: auto;
+		}
+		.item:nth-child(1) .border-radius{
+			border-radius: 130px;
+		}
+		.item:nth-child(2) .border-radius{
+			border-radius: 130px 0 0 0;
+		}
+		.item:nth-child(3) .border-radius{
+			border-radius: 130px 130px 0 0;
+		}
+		.item:nth-child(4) .border-radius{
+			border-radius: 130px 130px 0 0;
+			height: 130px;
+		}
+		.item:nth-child(5) .border-radius{
+			border-radius: 260px 0 0 0;
+		}
+		.item:nth-child(6) .border-radius{
+			border-radius: 130px/65px;
+			height: 130px;
+		}
+		.item:nth-child(7) .border-radius{
+			border-radius: 65px/130px;
+			width: 130px;
+		}
+		.item:nth-child(8) .border-radius{
+			border-radius: 130px 130px 0 0/65px 65px 0 0;
+			height: 65px;
+		}
+		.item:nth-child(9) .border-radius{
+			border-radius: 65px 0 0 65px/130px 0 0 130px;
+			width: 65px;
+		}
+		.item:nth-child(9) .border-radius{
+			border-radius: 65px 0 0 0/130px 0 0 0;
+			width: 65px;
+			height: 130px;
+		}
+		.item:nth-child(10) .border-radius{
+			border: 50px solid #8B0000;
+			border-radius: 100px;
+			width: 100px;
+			height: 100px;
+		}
+		.item:nth-child(11) .border-radius{
+			border: 50px solid #8B0000;
+			border-radius: 50px;
+			width: 100px;
+			height: 100px;
+		}
+		.item:nth-child(12) .border-radius{
+			border: 50px solid #8B0000;
+			border-radius: 100px 0 0 0;
+			width: 100px;
+			height: 100px;
+		}
+		.item:nth-child(13) .border-radius{
+			border: 50px solid #8B0000;
+			border-radius: 100px 0 100px 0;
+			width: 100px;
+			height: 100px;
+		}
+		.item:nth-child(14) .border-radius{
+			border-width: 130px;
+			border-style: solid;
+			border-color: #da2d34 #42ff6a #2492e7 #e5e849;
+			width: 0;
+			height: 0;
+		}
+		.item:nth-child(15) .border-radius{
+			border-width: 130px;
+			border-style: solid;
+			border-color: #da2d34 transparent #2492e7 #e5e849;
+			width: 0;
+			height: 0;
+			border-radius: 130px;
+		}
+		.item:nth-child(16) .border-radius{
+			border:130px solid #da2d34;
+			border-right-color: transparent;
+			width: 0;
+			height: 0;
+			border-radius: 130px;
+		}
+		.item:nth-child(17) .border-radius{
+			border:130px solid transparent;
+			border-right-color: #da2d34;
+			width: 0;
+			height: 0;
+			border-radius: 130px;
+		}
+		.item:nth-child(18) .border-radius{
+			border-top:130px solid #2492e7;
+			width: 260px;
+			height: 0;
+			border-radius: 130px 130px 0 0;
+		}
+		.item:nth-child(19) .border-radius{
+			border-top:130px solid #2492e7;
+			border-bottom:130px solid #e5e849;
+			width: 260px;
+			height: 0;
+			border-radius: 130px;
+		}
+		.item:nth-child(20) .border-radius{
+			border-top:130px solid #2492e7;
+			border-bottom:130px solid #e5e849;
+			width: 260px;
+			height: 0;
+			border-radius: 130px;
+		}
+		.item:nth-child(20) .border-radius:before{
+			content: '';
+			text-align: center;
+			position: absolute;
+			display: block;
+			top: 85px;
+			left: 20px;
+			
+			border: 50px solid #2492e7;
+			border-radius: 65px;
+			width: 30px;
+			height: 30px;
+			background-color: #e5e849;
+		}
+		.item:nth-child(20) .border-radius:after{
+			content: '';
+			text-align: center;
+			position: absolute;
+			display: block;
+			bottom: 85px;
+			right: 20px;
+			
+			border: 50px solid #e5e849;
+			border-radius: 65px;
+			width: 30px;
+			height: 30px;
+			background-color: #2492e7;
+		}
+		.item:nth-child(21) .border-radius{
+			width: 200px;
+			height: 100px;
+			border-radius: 20px;
+			background-color: #e5e849;
+			border: 1px solid #e5e849;
+		}
+		.item:nth-child(21) .border-radius:before{
+			content: '';
+			text-align: center;
+			position: absolute;
+			display: block;
+			top: 100px;
+			left: -20px;
+			
+			width: 0;
+			height: 0;
+			border:50px solid transparent;
+			border-right-color: #e5e849;
+		}
+		.item:nth-child(22) .border-radius{
+			width: 40px;
+			height: 40px;
+			border-color: transparent transparent #e5e849 transparent;
+			border-style: solid;
+			border-width: 0 0 70px 70px;
+			border-radius: 0 0 150px 0;
+		}
+		.item:nth-child(23) .border-radius{
+			width: 200px;
+			height: 100px;
+			border-radius: 20px;
+			background-color: #e5e849;
+			border: 1px solid #e5e849;
+		}
+		.item:nth-child(23) .border-radius:before{
+			content: '';
+			text-align: center;
+			position: absolute;
+			display: block;
+			top: 100px;
+			right: 30px;
+			
+			width: 40px;
+			height: 40px;
+			border-color: transparent transparent #e5e849 transparent;
+			border-style: solid;
+			border-width: 0 0 40px 70px;
+			border-radius: 0 0 150px 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<h1>CSS3 边框圆角</h1>
+			<img src="images/CSS3圆角图解.png" alt="">
+		</header>
+		<div class="main">
+			<div class="item" data-brief="130px" data-wh="W:260px,H:260px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px 0 0 0" data-wh="W:260px,H:260px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px 130px 0 0" data-wh="W:260px,H:260px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px 130px 0 0" data-wh="W:260px,H:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="260px 0 0 0" data-wh="W:260px,H:260px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px/65px" data-wh="W:260px,H:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="65px/130px" data-wh="W:130px,H:260px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px 130px 0 0/65px 65px 0 0" data-wh="W:260px,H:65px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="65px 0 0 0/130px 0 0 0" data-wh="W:65px,H:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="100px" data-wh="W:100px,H:100px,BW:50px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="50px" data-wh="W:100px,H:100px,BW:50px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="100px 0 0 0" data-wh="W:100px,H:100px,BW:50px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="100px 0 100px 0" data-wh="W:100px,H:100px,BW:50px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="给每一个边框单独设置颜色" data-wh="W:0,H:0,BW:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px" data-wh="W:0,H:0,BW:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px" data-wh="W:0,H:0,BW:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="130px" data-wh="W:0,H:0,BW:130px">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="W:260px,H:0">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="W:260px,H:0">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="W:260px,H:0">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="">
+				<div class="border-radius"></div>
+			</div>
+			<div class="item" data-brief="" data-wh="">
+				<div class="border-radius"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</body>
+</html>
