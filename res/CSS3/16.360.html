@@ -88,7 +88,7 @@
 		</section>
 	</div>
 	<div class="goBack">
-		<a href="/index.html">回到首页</a>
+		<a href="/demo/index.html">回到首页</a>
 	</div>
 	<script src="js/jquery.fullPage.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
@@ -98,7 +98,7 @@
 				navigation: true,
 				afterLoad: function (anchorLink, index) {
 					$('.section').removeClass('current');
-					
+
 					// 延时100毫秒执行
 					setTimeout(function () {
 						$('.section').eq(index - 1).addClass('current');

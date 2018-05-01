@@ -38,11 +38,11 @@
 
 	<div id="container"></div>
 	<div class="goBack">
-		<a href="/index.html">回到首页</a>
+		<a href="/demo/index.html">回到首页</a>
 	</div>
 	<script charset="utf-8" src="lib/konva/konva.js"></script>
 	<script type="text/javascript">
-		
+
 		function Histogram( option ){
 			this._init( option );
 		}
@@ -50,7 +50,7 @@
 			_init: function( option ){
 				if(!option.data) option.data = [];
 				if(!option.cont) option.cont = {};
-				
+
 				var stage = document.querySelector('#'+option.stage.id);
 				this.stage = {
 					id: option.stage.id,
@@ -78,7 +78,7 @@
 					var width = 8/10 * this.cont.contW;
 					var margin = 2/10 * this.cont.contW;
 					var oneWidth = width / (length * 2);
-					
+
 					var stage = new Konva.Stage({
 						container: this.stage.id,
 						width: this.stage.w,
@@ -121,7 +121,7 @@
 					  Layer.add(rect);
 					  Layer.add(topText);
 					  Layer.add(bottomText);
-						
+
 					}
 					Layer.draw();
 					//点击画布事件
@@ -172,7 +172,7 @@
 			]
 		});
 		h.drawLayer(true);
-		
+
 	</script>
 </body>
 </html>

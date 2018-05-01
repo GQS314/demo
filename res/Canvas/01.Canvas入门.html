@@ -61,12 +61,12 @@
 		</canvas>
 	</div>
 	<div class="goBack">
-		<a href="/index.html">回到首页</a>
+		<a href="/demo/index.html">回到首页</a>
 	</div>
 	<script type="text/javascript">
 		//canvas不能用css控制宽高，用过内联样式表或js
-		
-		
+
+
 		//1.获取canvas标签
 		var canvas01 = document.querySelector('.content>canvas:nth-child(1)');
 		//2.获取canvas上下文
@@ -78,14 +78,14 @@
 		ctx01.lineTo(100,200);
 		ctx01.lineTo(100,100);
 		ctx01.stroke();
-		
+
 		ctx01.beginPath();
 		ctx01.moveTo(200,200);//起点
 		ctx01.lineTo(300,300);
 		ctx01.lineTo(200,300);
 		ctx01.closePath();		//自动闭合
 		ctx01.stroke();
-		
+
 		//重置路径、重新开始一条路径、新状态
 		/*
 		* 仍然会继承前面设置的样式，如lineWidth、strokeStyle等
@@ -109,8 +109,8 @@
 		ctx01.fillStyle = '#1098CC';
 		//填充
 		ctx01.fill();
-		
-		
+
+
 		var canvas02 = document.querySelector('.content>canvas:nth-child(2)');
 		var ctx02 = canvas02.getContext('2d');
 		var canvW = canvas02.width;
@@ -125,7 +125,7 @@
 		}
 		ctx02.lineWidth = .2;
 		ctx02.stroke();
-		
+
 		//坐标系，原点50,300
 		ctx02.beginPath();
 		ctx02.moveTo(50,300);
@@ -141,7 +141,7 @@
 		ctx02.lineWidth = 2;
 		ctx02.strokeStyle = '#150dff';
 		ctx02.stroke();
-		
+
 		//折线图
 		ctx02.beginPath();
 		ctx02.moveTo(50,300);
@@ -156,22 +156,22 @@
 		ctx02.lineTo(332,280);
 		ctx02.strokeStyle = '#b50be5';
 		ctx02.stroke();
-		
+
 		var canvas03 = document.querySelector('.content>canvas:nth-child(3)');
 		var ctx03 = canvas03.getContext('2d');
 		//矩形 rect(x,y,width,height)x，y，宽，高
 		ctx03.rect(10,10,50,50);
 		ctx03.strokeStyle = '#1715cb';
 		ctx03.stroke();
-		
+
 		ctx03.beginPath();
 		ctx03.strokeStyle = '#bd4645';
 		ctx03.strokeRect(20,20,50,50);
-		
+
 		//清除、橡皮擦，把矩形内的所有图像清除;
 		ctx03.clearRect(0,0,30,30);
 		//canvas.width = canvas.width 重新设置canvas的款或高可以清除画布的内容
-		
+
 		//圆 arc(x,y,r,sAngle,eAngle,counterclockwise)
 		/*   arc(x,y,半径,开始角度,结束角度,绘画方向：true逆时针/false顺时针)
 						1.5*PI
@@ -179,35 +179,35 @@
 			 1*PI  ├-┼-┤  0         --公式：  弧度=角度*PI/180
 							 ┴
 						0.5*PI
-		 
-		     
+
+
 						 ┬		文字					--文字的x、y坐标，公式：
 		 		   ├-┼-┤  	        	x = x0 + Math.cos(角度*Math.PI/180) * (r+距离)
 		 				 ┴								y = y0 + Math.sin(角度*Math.PI/180) * (r+距离)
-		      
-						
-						
+
+
+
 		 */
 		ctx03.beginPath();
 		ctx03.arc(100,100,50,0,1.5*Math.PI);
 		ctx03.strokeStyle = '#000';
 		//stroke绘制空心圆弧，fill绘制(填充)实心圆弧
 		ctx03.stroke();
-		
+
 		ctx03.beginPath();
 		ctx03.moveTo(206,102);
 		ctx03.arc(206,102,50,0,30*Math.PI/180);
 		ctx03.closePath();
 		ctx03.fillStyle = '#1696dc';
 		ctx03.fill();
-		
+
 		ctx03.beginPath();
 		ctx03.moveTo(200,100);
 		ctx03.arc(200,100,50,0,30*Math.PI/180,true);
 		ctx03.closePath();
 		ctx03.fillStyle = '#dc5a4d';
 		ctx03.fill();
-		
+
 		//绘制文字
 		ctx03.beginPath();
 //		ctx03.moveTo(210,50);
@@ -223,7 +223,7 @@
 		//ctx03.strokeText('你好',250,50);
 		//填充字体，实心
 		ctx03.fillText('你好',250,50);
-		
+
 		//
 		var data = [{
 			"value": .2,
@@ -263,7 +263,7 @@
 //			ctx03.stroke();
 			ctx03.fillStyle = data[i].color;
 			ctx03.fill();
-			
+
 			var txt = data[i].value * 100 + '%-' + data[i].title;
 			var txtAngle = tempAngle + angle / 2;
 			var txt_x = x0 + Math.cos(txtAngle * Math.PI / 180) * (radius + 20);
@@ -277,11 +277,11 @@
 			//返回指定返回包含指定文本宽度的对象。
 			var w = ctx03.measureText(txt).width;
 			console.log(w);
-			
+
 			tempAngle += angle;
 		}
-		
-		
+
+
 		var canvas04 = document.querySelector('.content>canvas:nth-child(4)');
 		var ctx04 = canvas04.getContext('2d');
 		//图片绘制 ：效率比绘制图形要高得多
@@ -302,10 +302,10 @@
 		 			在显示的canvas上绘制需要在内存中计算，还需要显卡,
 		 			这样就可以减少多次绘制时消耗的显卡的性能
 		 	ctx.drawImage(canvas, x, y)
-		 
-		 
+
+
 		 */
-		
+
 		//1.创建图片的dom对象
 		var img = new Image();
 		//只要设置的src属性，当前img对象立即去加载图片
@@ -322,14 +322,14 @@
 			newH = newW * oldH / oldW;
 			ctx04.drawImage(img, 0, 210, newW, newH);
 		};
-		
+
 		//
 		var img2 = new Image();
 		img2.src = 'img/DMMban.png';
 		img2.onload = function () {
 			ctx04.drawImage(img2, 40, 65, 40, 65, 200, 210, 40, 65);
 		};
-		
+
 		//序列帧动画
 		var img3 = new Image();
 		img3.src = 'img/DMMban.png';
@@ -345,7 +345,7 @@
 //				clearInterval(sit);
 			},1000 / 10); //1秒10帧
 		};
-		
+
 		/*
 		* 序列帧动画，面向对象编程：开始
 		* */
@@ -359,7 +359,7 @@
 				if(!option.direction) option.direction = {};
 				if(!option.position) option.position = {};
 				if(!option.animateSize) option.animateSize = {};
-				
+
 				//图片地址
 				this.src = option.src || 'img/DMMban.png';
 				//x轴；总几帧，从第几帧开始，每帧的宽度（每帧的宽度必须一致）
@@ -402,7 +402,7 @@
 							dindex = this.direction.index,
 							sh = this.direction.sheight,
 							speed = this.speed;
-					
+
 					var img = new Image();
 					img.src = this.src;
 					img.onload = function () {
@@ -437,8 +437,8 @@
 		/*
 		 * 序列帧动画，面向对象编程：结束
 		 * */
-		
-		
+
+
 		var canvas05 = document.querySelector('.content>canvas:nth-child(5)');
 		var ctx05 = canvas05.getContext('2d');
 		/*
@@ -452,7 +452,7 @@
 				if(!option.position) option.position = {};
 				if(!option.cdSize) option.cdSize = {};
 				if(!option.cdStyle) option.cdStyle = {};
-				
+
 				this.position = {
 					x: option.position.x || 0 ,
 					y: option.position.y || 0 ,
@@ -574,7 +574,7 @@
 		 * */
 		var canvas06 = document.querySelector('.content>canvas:nth-child(6)');
 		var ctx06 = canvas06.getContext('2d');
-		
+
 		var newCd2 = new Coordinate({
 			position: {x: 30, y: 350, width: 700, height: 300},
 			cdSize: {maxWidth: 650, maxHeight: 300}
@@ -590,31 +590,31 @@
 					style: { width: 3, color: '#54cb7b'},
 					dataType: 1
 				}]);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	</script>
 </body>
 </html>

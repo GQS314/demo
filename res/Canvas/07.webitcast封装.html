@@ -38,7 +38,7 @@
 
 	<div id="container"></div>
 	<div class="goBack">
-		<a href="/index.html">回到首页</a>
+		<a href="/demo/index.html">回到首页</a>
 	</div>
 	<script charset="utf-8" src="lib/konva/konva.js"></script>
 	<script type="text/javascript">
@@ -53,8 +53,8 @@
 				if(!option.stage) option.stage = {};
 				if(!option.cont) option.cont = {};
 				if(!option.data) option.data = [];
-				
-				
+
+
 				var stage = document.querySelector('#'+option.stage.id);
 				//容器id 容器宽 容器高
 				this.stage = {
@@ -75,7 +75,7 @@
 				//{r: 90,bg: '#000',color: '#fff',opacity: .8,text: 'WEB全栈'}
 				this.data = [];
 				this.radiusBase = (this.cont.contW / 2 - option.data[0][0].r) / option.data.length ;
-				
+
 				for(var i = 0;i < option.data.length;i++){
 					this.data[i] = [];
 				  for(var j = 0;j < option.data[i].length;j++){
@@ -86,16 +86,16 @@
 							bg: option.data[i][j].bg || randomBg,
 							color: option.data[i][j].color || '#fff',
 							opacity: option.data[i][j].opacity || .8,
-							
+
 							text: option.data[i][j].text || 'WEB全栈',
 							fontSize: option.data[i][j].fontSize || 18,
 							fontFamily: option.data[i][j].fontFamily || '微软雅黑',
 							fontStyle: option.data[i][j].fontStyle || 'normal',
-						
+
 							Ring: option.data[i][j].Ring || (option.data[i][j].r||rb) / 5 + (option.data[i][j].r||rb),
 							RingBg: option.data[i][j].RingBg || '#b4b4b4',
 							RingOpacity: option.data[i][j].RingOpacity || .4
-							
+
 						}
 				  }
 				}
@@ -164,10 +164,10 @@
 							stage.add(layer);
 						}
 						for(var k = 0;k < data[j].length;k++){
-							
+
 							var innerR =  data[j][k].r,
 									outerR = data[j][k].Ring;
-							
+
 							var layerRadius = data[0][0].r  + this.radiusBase * j;
 							var angle = 360 / data[j].length;
 							//计算圆心的位置
@@ -264,9 +264,9 @@
 			]
 		});
 		s.drawLayer(true);
-		
-		
-		
+
+
+
 	</script>
 </body>
 </html>

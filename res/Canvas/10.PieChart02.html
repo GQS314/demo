@@ -33,7 +33,7 @@
 <body>
 <div id="container"></div>
 <div class="goBack">
-	<a href="/index.html">回到首页</a>
+	<a href="/demo/index.html">回到首页</a>
 </div>
 <script charset="utf-8" src="lib/konva/konva.js"></script>
 <script type="text/javascript">
@@ -46,7 +46,7 @@
 			this.y = option.y || 0;
 			this.r = option.r || 0;
 			this.data = option.data || [];
-			
+
 			//饼状图所有的 物件组
 			this.group = new Konva.Group({
 				x: this.x,
@@ -64,7 +64,7 @@
 			});
 			this.group.add(this.wedgeGroup);
 			this.group.add(this.textGroup);
-			
+
 			//绘制所有楔形
 			var self = this,
 					tempAngle = -90;
@@ -78,9 +78,9 @@
 					fill: item.color,
 					rotation: tempAngle
 				});
-				
+
 				self.wedgeGroup.add(wedge);
-				
+
 				var outerR = self.r + 30,
 						textAngle = angle / 2 + tempAngle;
 				var textX = outerR * Math.cos( textAngle * Math.PI / 180),
@@ -96,7 +96,7 @@
 					//text.getWidth() 获取文本宽度
 					text.x(text.x() - text.getWidth());
 				}
-				
+
 				tempAngle += angle;
 				self.textGroup.add(text);
 			});
@@ -123,7 +123,7 @@
 					item.angle(0);
 				});
 			}
-			
+
 			var item = this.wedgeGroup.getChildren()[this._animateIndex];
 			item.to({
 				angle: this.data[this._animateIndex].value * 360,
@@ -138,9 +138,9 @@
 				}
 			});
 		}
-		
+
 	};
-	
+
 	var stage = new Konva.Stage({
 		container: 'container',
 		width: window.innerWidth,
@@ -148,10 +148,10 @@
 	});
 	var layer = new Konva.Layer();
 	stage.add(layer);
-	
+
 	var cenX = stage.width() / 2;
 	var cenY = stage.height() / 2;
-	
+
 	var wedge = new Wedge({
 		x: cenX,
 		y: cenY,
@@ -168,10 +168,10 @@
 	wedge.addToGroupOrLayer(layer);
 	layer.draw();
 	wedge.playAnimate();
-	
-	
-	
-	
+
+
+
+
 	/*
 	 * data:[
 	 {name:'web',value:.25,color:'#dc5a4d'},
