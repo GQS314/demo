@@ -224,5 +224,24 @@ body {
       border-top: 1px solid #e0e0e0; }
     .jd-product .productSection > .topbar.nobor {
       border-bottom: 0; }
-
+      .goBack {
+      	width: 4rem;
+      	height: 4rem;
+      	background-color: rgba(0, 0, 0, 0.7);
+      	text-align: center;
+      	line-height: 4rem;
+      	font-size: 0.8rem;
+      	cursor: pointer;
+      	position: fixed;
+      	border-radius: 50%;
+      	bottom: 2rem;
+      	right: 2rem;
+      	z-index: 100;
+      }
+      .goBack>a{
+      	color: #ccc;
+      }
+      .goBack>a:hover{
+      	color: #fff;
+      }
 /*# sourceMappingURL=jdM.css.map */
